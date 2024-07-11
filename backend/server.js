@@ -1,11 +1,16 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
+
+const budgetRoutes = require("./routes/budgetRoutes");
 
 // express app
 const app = express();
 
 // middleware
 app.use(express.json());
+app.use("/api/budget", budgetRoutes);
 
 // connect to db
 mongoose
