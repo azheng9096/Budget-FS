@@ -7,42 +7,10 @@ export type Data = {
 
 type Props = {
   data: Data[];
+  showRadialLink?: boolean;
 };
 
-const dummy = [
-  {
-    id: "hack",
-    label: "hack",
-    value: 588,
-    color: "hsl(272, 70%, 50%)",
-  },
-  {
-    id: "lisp",
-    label: "lisp",
-    value: 407,
-    color: "hsl(184, 70%, 50%)",
-  },
-  {
-    id: "go",
-    label: "go",
-    value: 252,
-    color: "hsl(307, 70%, 50%)",
-  },
-  {
-    id: "erlang",
-    label: "erlang",
-    value: 449,
-    color: "hsl(267, 70%, 50%)",
-  },
-  {
-    id: "java",
-    label: "java",
-    value: 405,
-    color: "hsl(273, 70%, 50%)",
-  },
-];
-
-const Donut = ({ data }: Props) => {
+const Donut = ({ data, showRadialLink = false }: Props) => {
   return (
     <ResponsivePie
       data={data}
@@ -59,6 +27,7 @@ const Donut = ({ data }: Props) => {
       arcLinkLabelsColor={{ from: "color" }}
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
+      enableArcLinkLabels={showRadialLink}
     />
   );
 };
