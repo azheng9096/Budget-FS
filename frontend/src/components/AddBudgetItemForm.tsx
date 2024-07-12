@@ -43,6 +43,12 @@ const BudgetItemFormButton = styled.button`
 
   color: white;
   text-transform: uppercase;
+
+  transition: all var(--anim-time) ease-in-out;
+  &:hover {
+    cursor: pointer;
+    background-color: var(--secondary-text-hover)
+  }
 `;
 
 const ErrorField = styled.p`

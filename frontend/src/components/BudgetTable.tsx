@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { BudgetItem } from "../types/budget";
+import BudgetTableRow from "./BudgetTableRow";
 
 type Props = {
   headerName?: string;
@@ -58,22 +59,27 @@ const BudgetTable = ({ headerName, budgetItems }: Props) => {
             <th scope="col">Name</th>
             <th scope="col">Category</th>
             <th scope="col">Amount</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           {budgetItems &&
             budgetItems.map((item, index) => (
-              <tr key={index}>
-                <td>
-                  {/* {formatDistanceToNow(new Date(item.date), {
-                    addSuffix: true,
-                  })} */}
-                  {new Date(item.date).toISOString().split("T")[0]}
-                </td>
-                <td>{item.name}</td>
-                <td>{item.category}</td>
-                <td>${item.amount.toString()}</td>
-              </tr>
+              // <tr key={index}>
+              //   <td>
+              //     {/* {formatDistanceToNow(new Date(item.date), {
+              //       addSuffix: true,
+              //     })} */}
+              //     {new Date(item.date).toISOString().split("T")[0]}
+              //   </td>
+              //   <td>{item.name}</td>
+              //   <td>{item.category}</td>
+              //   <td>${item.amount.toString()}</td>
+              //   <td>
+              //     <span className="material-symbols-rounded error">delete</span>
+              //   </td>
+              // </tr>
+              <BudgetTableRow key={index} budgetItem={item} />
             ))}
         </tbody>
       </Table>
