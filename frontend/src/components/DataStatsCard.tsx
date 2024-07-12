@@ -5,6 +5,7 @@ type Props = {
   header: string;
   icon: string;
   data: string;
+  dataColor?: string;
 };
 
 const ContentContainer = styled.div`
@@ -15,7 +16,7 @@ const ContentContainer = styled.div`
   justify-content: space-between;
 `;
 
-const DataStatsCard = ({ header, icon, data }: Props) => {
+const DataStatsCard = ({ header, icon, data, dataColor }: Props) => {
   return (
     <DataCard>
       <ContentContainer>
@@ -28,7 +29,7 @@ const DataStatsCard = ({ header, icon, data }: Props) => {
           </span>
           <h4>{header}</h4>
         </div>
-        <h3>{data}</h3>
+        <h3 style={{ color: dataColor }}>{data}</h3>
       </ContentContainer>
     </DataCard>
   );

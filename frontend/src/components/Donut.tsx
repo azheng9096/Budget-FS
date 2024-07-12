@@ -14,7 +14,7 @@ const Donut = ({ data, showRadialLink = false }: Props) => {
   return (
     <ResponsivePie
       data={data}
-      margin={{ top: 15, right: 15, bottom: 15, left: 15 }}
+      margin={{ top: 25, right: 25, bottom: 25, left: 25 }}
       innerRadius={0.45}
       padAngle={5}
       cornerRadius={5}
