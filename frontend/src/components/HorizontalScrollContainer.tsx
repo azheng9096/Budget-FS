@@ -6,7 +6,7 @@ type Props = {
 };
 
 const ScrollContainer = styled.div`
-  width: 90%;
+  width: 100%;
   overflow-x: auto;
 
   padding-top: 0.5rem;

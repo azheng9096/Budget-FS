@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 
 const Card = styled.div`
-  width: 10rem;
+  height: 10rem;
   aspect-ratio: 1/1;
 `;
 
