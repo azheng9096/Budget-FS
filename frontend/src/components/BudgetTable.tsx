@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { BudgetItem } from "../types/budget";
-import { formatDistanceToNow } from "date-fns";
 
 type Props = {
   headerName?: string;

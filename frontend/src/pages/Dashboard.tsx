@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import styled from "styled-components";
-import AddBudgetForm from "../components/AddBudgetForm";
-import Navbar from "../components/Navbar";
+import AddBudgetItemForm from "../components/AddBudgetItemForm";
 import BudgetTable from "../components/BudgetTable";
-import { BudgetItem } from "../types/budget";
-import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import { BudgetItemActionType } from "../context/BudgetItemsContext";
+import { useBudgetItemsContext } from "../hooks/useBudgetItemsContext";
 
 const Container = styled.div`
   display: flex;
@@ -12,7 +13,8 @@ const Container = styled.div`
 `;
 
 const Dashboard = () => {
-  const [budgetItems, setBudgetItems] = useState<BudgetItem[]>([]);
+  // const [budgetItems, setBudgetItems] = useState<BudgetItem[]>([]);
+  const { budgetItems, dispatch } = useBudgetItemsContext();
 
   useEffect(() => {
     const fetchBudgetItems = async () => {
@@ -20,7 +22,11 @@ const Dashboard = () => {
       const json = await response.json();
 
       if (response.ok) {
-        setBudgetItems(json);
+        dispatch({
+          type: BudgetItemActionType.SET_BUDGET_ITEMS,
+          payload: json,
+        });
+        // setBudgetItems(json);
       }
     };
 
@@ -30,8 +36,8 @@ const Dashboard = () => {
   return (
     <Container>
       <Navbar brandName="Budget Tracker" />
-      <AddBudgetForm />
-      <BudgetTable headerName="Budget Table" budgetItems={budgetItems}/>
+      <AddBudgetItemForm />
+      <BudgetTable headerName="Budget Table" budgetItems={budgetItems} />
     </Container>
   );
 };

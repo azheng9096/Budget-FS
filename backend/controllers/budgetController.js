@@ -29,6 +29,26 @@ const getBudgetItem = async (req, res) => {
 const createBudgetItem = async (req, res) => {
   const { name, category, amount } = req.body;
 
+  let emptyFields = [];
+
+  if (!name) {
+    emptyFields.push("name");
+  }
+
+  if (!category) {
+    emptyFields.push("category");
+  }
+
+  if (!amount) {
+    emptyFields.push("amount");
+  }
+
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: "Please fill in all the fields", emptyFields });
+  }
+
   // add doc to db
   try {
     const budgetItem = await budgetItemModel.create({
