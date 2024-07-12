@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { BudgetItemActionType } from "../context/BudgetItemsContext";
 import { useBudgetItemsContext } from "../hooks/useBudgetItemsContext";
 import { BudgetItem } from "../types/budget";
+import { NumberToMoneyString } from "../utils/constants";
 
 type Props = {
   budgetItem: BudgetItem;
@@ -52,7 +53,7 @@ const BudgetTableRow = ({ budgetItem }: Props) => {
       </td>
       <td>{budgetItem.name}</td>
       <td>{budgetItem.category}</td>
-      <td>${budgetItem.amount.toString()}</td>
+      <td>{NumberToMoneyString(budgetItem.amount)}</td>
       <td>
         <DeleteButton onClick={handleClick}>
           <span className="material-symbols-rounded error">delete</span>

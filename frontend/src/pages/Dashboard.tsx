@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import AddBudgetItemForm from "../components/AddBudgetItemForm";
+import BudgetDataSection from "../components/BudgetDataSection";
 import BudgetTable from "../components/BudgetTable";
 import Navbar from "../components/Navbar";
 import { BudgetItemActionType } from "../context/BudgetItemsContext";
@@ -31,11 +32,12 @@ const Dashboard = () => {
     };
 
     fetchBudgetItems();
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>
       <Navbar brandName="Budget Tracker" />
+      <BudgetDataSection budgetItems={budgetItems} />
       <AddBudgetItemForm />
       <BudgetTable headerName="Budget Table" budgetItems={budgetItems} />
     </Container>

@@ -4,6 +4,6 @@ export type BudgetItem = {
   _id: string;
   name: string;
   category: string;
-  amount: Number;
+  amount: number;
   date: Date;
 };

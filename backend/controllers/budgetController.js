@@ -3,7 +3,10 @@ const { budgetItemModel } = require("../models/budgetModel");
 
 // GET all budget items
 const getBudgetItems = async (req, res) => {
-  const budgetItems = await budgetItemModel.find({});
+  const budgetItems = await budgetItemModel
+    .find({})
+    .sort({ date: "desc" })
+    .exec();
 
   res.status(200).json(budgetItems);
 };

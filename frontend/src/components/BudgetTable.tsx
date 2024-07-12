@@ -65,20 +65,6 @@ const BudgetTable = ({ headerName, budgetItems }: Props) => {
         <tbody>
           {budgetItems &&
             budgetItems.map((item, index) => (
-              // <tr key={index}>
-              //   <td>
-              //     {/* {formatDistanceToNow(new Date(item.date), {
-              //       addSuffix: true,
-              //     })} */}
-              //     {new Date(item.date).toISOString().split("T")[0]}
-              //   </td>
-              //   <td>{item.name}</td>
-              //   <td>{item.category}</td>
-              //   <td>${item.amount.toString()}</td>
-              //   <td>
-              //     <span className="material-symbols-rounded error">delete</span>
-              //   </td>
-              // </tr>
               <BudgetTableRow key={index} budgetItem={item} />
             ))}
         </tbody>
