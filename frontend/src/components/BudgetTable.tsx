@@ -1,4 +1,11 @@
 import styled from "styled-components";
+import { BudgetItem } from "../types/budget";
+import { formatDistanceToNow } from "date-fns";
+
+type Props = {
+  headerName?: string;
+  budgetItems: BudgetItem[];
+};
 
 const Card = styled.div`
   padding: 0;
@@ -37,12 +44,14 @@ const Table = styled.table`
   }
 `;
 
-const BudgetTable = () => {
+const BudgetTable = ({ headerName, budgetItems }: Props) => {
   return (
     <Card className="card">
-      <TableHeader>
-        <h3>Budget Table</h3>
-      </TableHeader>
+      {headerName && (
+        <TableHeader>
+          <h3>{headerName}</h3>
+        </TableHeader>
+      )}
       <Table>
         <thead>
           <tr>
@@ -53,16 +62,20 @@ const BudgetTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2024-07-11</td>
-            <td>HTML tables</td>
-            <td>22</td>
-          </tr>
-          <tr>
-            <td>2024-07-11</td>
-            <td>HTML tables</td>
-            <td>22</td>
-          </tr>
+          {budgetItems &&
+            budgetItems.map((item, index) => (
+              <tr key={index}>
+                <td>
+                  {/* {formatDistanceToNow(new Date(item.date), {
+                    addSuffix: true,
+                  })} */}
+                  {new Date(item.date).toISOString().split("T")[0]}
+                </td>
+                <td>{item.name}</td>
+                <td>{item.category}</td>
+                <td>${item.amount.toString()}</td>
+              </tr>
+            ))}
         </tbody>
       </Table>
     </Card>
