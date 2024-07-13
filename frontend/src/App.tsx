@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar brandName="Budget Tracker" />
+        <Navbar brandName="Expense Tracker" />
         <Routes>
           <Route path="/" element={user ? <Dashboard /> : <Navigate to="/login" />} />
           <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
