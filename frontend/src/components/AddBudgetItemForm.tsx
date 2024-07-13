@@ -3,6 +3,7 @@ import { BudgetCategory } from "../types/budget";
 import { useBudgetItemsContext } from "../hooks/useBudgetItemsContext";
 import { SyntheticEvent, useState } from "react";
 import { BudgetItemActionType } from "../context/BudgetItemsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const BudgetItemForm = styled.form`
   display: flex;
@@ -47,7 +48,7 @@ const BudgetItemFormButton = styled.button`
   transition: all var(--anim-time) ease-in-out;
   &:hover {
     cursor: pointer;
-    background-color: var(--secondary-text-hover)
+    background-color: var(--secondary-text-hover);
   }
 `;
 
@@ -58,14 +59,21 @@ const ErrorField = styled.p`
 
 const AddBudgetItemForm = () => {
   const { dispatch } = useBudgetItemsContext();
+  const { user } = useAuthContext();
+
   const [name, setName] = useState("");
   const [category, setCategory] = useState(BudgetCategory[0]);
   const [amount, setAmount] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [emptyFields, setEmptyFields] = useState<string[]>([]);
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault(); // prevents page refresh on form submit
+
+    if (!user) {
+      setError("You must be logged in");
+      return;
+    }
 
     const budgetItem = { name, category, amount };
 
@@ -74,6 +82,7 @@ const AddBudgetItemForm = () => {
       body: JSON.stringify(budgetItem),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
     });
 

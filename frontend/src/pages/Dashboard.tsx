@@ -5,6 +5,7 @@ import BudgetDataSection from "../components/BudgetDataSection";
 import BudgetTable from "../components/BudgetTable";
 import { BudgetItemActionType } from "../context/BudgetItemsContext";
 import { useBudgetItemsContext } from "../hooks/useBudgetItemsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Container = styled.div`
   display: flex;
@@ -15,10 +16,13 @@ const Container = styled.div`
 const Dashboard = () => {
   // const [budgetItems, setBudgetItems] = useState<BudgetItem[]>([]);
   const { budgetItems, dispatch } = useBudgetItemsContext();
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const fetchBudgetItems = async () => {
-      const response = await fetch("/api/budget");
+      const response = await fetch("/api/budget", {
+        headers: { Authorization: `Bearer ${user.token}` },
+      });
       const json = await response.json();
 
       if (response.ok) {
@@ -30,8 +34,8 @@ const Dashboard = () => {
       }
     };
 
-    fetchBudgetItems();
-  }, [dispatch]);
+    if (user) fetchBudgetItems();
+  }, [dispatch, user]);
 
   return (
     <Container>

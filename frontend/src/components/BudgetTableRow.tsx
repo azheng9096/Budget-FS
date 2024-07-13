@@ -3,6 +3,7 @@ import { BudgetItemActionType } from "../context/BudgetItemsContext";
 import { useBudgetItemsContext } from "../hooks/useBudgetItemsContext";
 import { BudgetItem } from "../types/budget";
 import { NumberToMoneyString } from "../utils/constants";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 type Props = {
   budgetItem: BudgetItem;
@@ -27,10 +28,16 @@ const DeleteButton = styled.button`
 
 const BudgetTableRow = ({ budgetItem }: Props) => {
   const { dispatch } = useBudgetItemsContext();
+  const { user } = useAuthContext();
 
   const handleClick = async () => {
+    if (!user) return;
+
     const response = await fetch("/api/budget/" + budgetItem._id, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
     });
 
     const json = await response.json();
