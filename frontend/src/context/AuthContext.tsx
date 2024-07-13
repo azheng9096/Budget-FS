@@ -1,4 +1,10 @@
-import { createContext, Dispatch, ReactNode, useReducer } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  useEffect,
+  useReducer,
+} from "react";
 import { User } from "../types/user";
 
 export enum AuthActionType {
@@ -38,6 +44,14 @@ type Props = {
 
 export const AuthContextProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(authReducer, { user: null });
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") || "");
+
+    if (user) {
+      dispatch({ type: AuthActionType.LOGIN, payload: user });
+    }
+  }, []);
 
   console.log("AuthContext state: ", state);
   return (

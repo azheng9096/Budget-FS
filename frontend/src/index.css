@@ -28,6 +28,10 @@ code {
     monospace;
 }
 
+button {
+  letter-spacing: 0.05rem;
+}
+
 .material-symbols-rounded {
   color: var(--secondary-text);
 }
