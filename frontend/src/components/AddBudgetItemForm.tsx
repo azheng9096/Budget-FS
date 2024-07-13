@@ -98,7 +98,7 @@ const AddBudgetItemForm = () => {
       setError(null);
       setEmptyFields([]);
 
-      console.log("New Budget Item Added", json);
+      // console.log("New Budget Item Added", json);
       dispatch({
         type: BudgetItemActionType.CREATE_BUDGET_ITEM,
         payload: json,

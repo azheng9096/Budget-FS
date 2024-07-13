@@ -3,8 +3,10 @@ const { budgetItemModel } = require("../models/budgetModel");
 
 // GET all budget items
 const getBudgetItems = async (req, res) => {
+  const user_id = req.user._id;
+
   const budgetItems = await budgetItemModel
-    .find({})
+    .find({ user_id })
     .sort({ date: "desc" })
     .exec();
 
@@ -54,10 +56,12 @@ const createBudgetItem = async (req, res) => {
 
   // add doc to db
   try {
+    const user_id = req.user._id;
     const budgetItem = await budgetItemModel.create({
       name,
       category,
       amount,
+      user_id,
     });
     res.status(200).json(budgetItem);
   } catch (error) {
