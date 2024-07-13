@@ -4,15 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BudgetItemsContextProvider } from "./context/BudgetItemsContext";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <BudgetItemsContextProvider>
-      <App />
-    </BudgetItemsContextProvider>
+    <AuthContextProvider>
+      <BudgetItemsContextProvider>
+        <App />
+      </BudgetItemsContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
 
